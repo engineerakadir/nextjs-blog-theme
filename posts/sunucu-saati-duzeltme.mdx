@@ -4,26 +4,29 @@ description: "Centos işletim sistemli sunucularda sunucu saati düzeltmek için
 date: Jun 16 2022
 ---
 
-Sunucu saati hatalı olduğunda bazı web servisler hata verebilir. Bunun yanında sunucu üzerindeki servislerin sağldaığı bazı hizmetler çalışmayabilir. Örneğin; 
+Sunucu saati hatalı olduğunda bazı servisler hata verebilir. Bunun yanında sunucu üzerindeki servislerin sağladığı bazı hizmetler çalışmayabilir. Örneğin; 
 
-- websitesine Google Authenticator ile giriş yapılamıyorsa bunun sebebi sunucu saatinin yanlış olmasından kaynaklıdır.
-- Mesela, e-ticaret sitesinde ödeme anında hata alınabilir.
+* websitesine Google Authenticator ile giriş yapılamıyorsa bunun sebebi sunucu saatinin yanlış olmasından kaynaklıdır.
+* mesela, e-ticaret sitesinde ödeme anında hata alınabilir.
 
-Bu durumda aşağıdaki komutlar çalıştırlarak düzenleme yapılır.
+Bu durumda aşağıdaki komutlar ile düzenleme yapılır.
 
-SSH komut saturına aşağıdaki komut yazılarak manuel olarak saat güncellenir
+SSH üzerinden aşağıdaki komut yazılarak manuel olarak saat güncellenir:
 
-`date -s "anlık saat"`
+```date -s "anlık saat"
+```
 
-Globaldeki saat yayını yaypan sunucudan eş zamanlı saati çekmek için
+Globaldeki saat yayını yaypan sunucudan eş zamanlı saati çekmek için:
 
-`yum install ntpdate`
-`ntpdate 0.tr.pool.ntp.org`
+```yum install ntpdate
+ntpdate 0.tr.pool.ntp.org
+```
 
 Sunucu saati senkronizasyon yapması için günlük bir kere çalışacak cronu ayarlamak için:
 
-`echo "/usr/sbin/ntpdate tr.pool.ntp.org" > /etc/cron.daily/ntp`
-`chmod u+x /etc/cron.daily/ntp`
+```echo "/usr/sbin/ntpdate tr.pool.ntp.org" > /etc/cron.daily/ntp
+chmod u+x /etc/cron.daily/ntp
+```
 
 * * * 
 Buna benzer pratik bilgiler için takipte kalın.
